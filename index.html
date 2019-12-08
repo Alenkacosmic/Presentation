@@ -1,0 +1,323 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="one"><img data-src="https://miro.medium.com/max/4988/1*ISGtKTBwJem2C7tPfKL4-A.jpeg" alt="intro">
+					<h1>new react with hooks</h1>
+					<aside class="notes">
+						With React 16.8, React Hooks are available in a stable release!
+						There are so many positive reviews and feedbacks to them. Even discussions if the new React with Hooks means the end of Redux?
+						But, what are they? Hooks - what are they and what do they add to React?
+					</aside>
+				</section>
+				<section class="two">
+					<h2>no breaking changes</h2>
+					<ul>
+						<li>Completely opt-in.</li>
+						<li>100% backwards-compatible.</li>
+						<li>Available now.</li>
+					</ul>
+					<p>There are no plans to remove classes from React.</p>
+					<p>Hooks don’t replace your knowledge of React concepts.</p>
+					<aside class="notes">
+							1.You can try Hooks in a few components without rewriting any existing code. 
+								But you don’t have to learn or use Hooks right now if you don’t want to. <br>
+							2. Hooks don’t contain any breaking changes. <br>
+							3. Hooks are now available with the release of v16.8.0. <br>
+							There are no plans to remove classes from React. <br>
+							Crucially, Hooks work side-by-side with existing code so you can adopt them gradually. <br>
+							There is no rush to migrate to Hooks. It is recommended to avoid any “big rewrites”, especially for existing, complex class components. <br>
+							It takes a bit of a mindshift to start “thinking in Hooks”. <br>
+							Hooks don’t replace your knowledge of React concepts. <br>
+							Instead, Hooks provide a more direct API to the React concepts you already know: props, state, context, refs, and lifecycle. <br>
+							Hooks also offer a new powerful way to combine them. <br>
+					</aside>
+				</section>
+				<section class="three">
+						<section>
+							<h2>Introducing Hooks</h2>
+							<img data-src="https://pbs.twimg.com/media/DqXfJBVWoAA8VP9.jpg" alt="problems">
+							<aside class="notes">
+								so.. first of all there is great need to somehow explain teh motivation to implement the hooks into React itself. 
+								and here we may see the main problems met by developers using React.
+								even if not all of them completely might be solved by hooks. nevertheless Hooks solve wide variety of seemingly unconnected problems.
+
+							</aside>
+						</section>
+						<section>
+							<h3>It’s hard to reuse stateful logic between components</h3>
+							<img data-src="https://i.redd.it/pdvkpgjq6vo11.jpg" alt="wrapper hell">
+							<aside class="notes">
+									React doesn’t offer a way to “attach” reusable behavior to a component (for example, connecting it to a store). 
+									So it requires you to restructure your components when you use them, which can make code harder to follow. 
+									If you look at a typical React application, you will likely find a “wrapper hell” 
+									of components surrounded by layers of providers, consumers, higher-order components, render props, and other abstractions. 
+									Really: React needs a better primitive for sharing stateful logic. <br>
+									With Hooks, you can extract stateful logic from a component so it can be tested independently and reused. 
+									you to reuse stateful logic without changing your component hierarchy. 
+									This makes it easy to share Hooks among many components or with the community.
+							</aside>
+						</section>
+						<section>
+							<h3>Complex components become hard to understand</h3>
+							<img data-src="https://miro.medium.com/max/3126/1*8Uqq6mfgvApdH2LzuXVdUg.png" alt="comparing">
+							<aside class="notes">
+									There is often need to maintain components that started out simple but grew into an 
+									unmanageable mess of stateful logic and side effects. 
+									Each lifecycle method often contains a mix of unrelated logic. 
+									Mutually related code that changes together gets split apart, but completely unrelated code ends up combined in a single method
+									This makes it too easy to introduce bugs and inconsistencies. <br>
+									In many cases it’s not possible to break these components into smaller ones. It’s also difficult to test them. 
+									This is one of the reasons many people prefer to combine React with a separate state management library. 
+									However, that often introduces too much abstraction, requires you to jump between different files, 
+									and makes reusing components more difficult. <br>
+									Hooks let you split one component into smaller functions based on what pieces are related 
+									(such as setting up a subscription or fetching data), 
+									rather than forcing a split based on lifecycle methods. 
+							</aside>
+						</section>
+						<section>
+							<h3>Classes confuse both people and machines</h3>
+							<pre><code>
+									import React, { useState } from 'react';
+									function Example() {
+										// Declare a new state variable, which we'll call "count"
+										const [count, setCount] = useState(0);
+		
+										return (
+											&lt;div&gt;
+												&lt;p&gt;You clicked {count} times &lt;/p&gt;
+												&lt;button onClick={() => setCount(count + 1)}&gt;
+													Click me
+												&lt;/button&gt;
+											&lt;/div&gt;
+										);
+									}
+							</code></pre>
+							<aside class="notes">
+									It was found out that classes can be a large barrier to learning React. 
+									You have to understand how `this` works in JavaScript, which is very different from how it works in most languages. 
+									You have to remember to bind the event handlers. Without unstable syntax proposals, the code is very verbose. 
+									People can understand props, state, and top-down data flow perfectly well but still struggle with classes. 
+									The distinction between function and class components in React and when to use each one leads to disagreements even between experienced React developers.
+									So, hooks let you use React features without writing a class.
+							</aside>
+						</section>
+					</section>
+				<section class="four">
+					<section>
+						<h2>Hooks at a Glance</h2>
+						<ul><p>Basic Hooks</p>
+							<li>useState</li>
+							<li>useEffect</li>
+							<li>useContext</li>
+						</ul>
+						<aside class="notes">
+								Let's have a look at three basic and the most common in use ones <br>
+								But what is a Hook? <br>
+								Hooks are functions that let you “hook into” React state and lifecycle features from function components. 
+								By this, we mean that hooks allow us to easily manipulate the state of our functional component without needing to convert them into class components. 
+								Hooks don’t work inside classes(because they let you use React without classes).
+						</aside>
+					</section>
+					<section>
+						<h2>useState</h2>
+						<pre><code>
+								import React, { useState } from 'react';
+								function Example() {
+									// Declare a new state variable, which we'll call "count"
+									const [count, setCount] = useState(0);
+								
+									return (
+										&lt;div&gt;
+											&lt;p&gt;You clicked {count} times&lt;/p&gt;
+											&lt;button onClick={() => setCount(count + 1)}&gt;
+												Click me
+											&lt;/button&gt;
+										&lt;/div&gt;
+									);
+								}
+						</code></pre>
+						<aside class="notes">
+								What do we pass to useState as an argument? The only argument to the useState() Hook is the initial state. 
+								Unlike with classes, the state doesn’t have to be an object. We can keep a number or a string if that’s all we need. 
+								In our example, we just want a number for how many times the user clicked, so pass 0 as initial state for our variable. 
+								(If we wanted to store two different values in state, we would call useState() twice.) <br>
+								What does useState return? It returns a pair of values: the current state and a function that updates it. 
+								This is why we write const [count, setCount] = useState(). This is similar to this.state.count and this.setState in a class, 
+								except you get them in a pair. <br>
+								how React knows which component useState corresponds to since we’re not passing anything like this back to React <br>
+								React keeps track of the currently rendering component. 
+								Thanks to the Rules of Hooks, Hooks are only called from React components (or custom Hooks — which are also only called from React components).
+								There is an internal list of “memory cells” associated with each component. 
+								They’re just JavaScript objects where we can put some data. When you call a Hook like useState(), 
+								it reads the current cell (or initializes it during the first render), and then moves the pointer to the next one. 
+								This is how multiple useState() calls each get independent local state.
+						</aside>
+					</section>
+					<section>
+						<h2>useEffect</h2>
+						<pre><code>
+								import React, { useState, useEffect } from 'react';
+								function Example() {
+									const [count, setCount] = useState(0);
+								
+									// Similar to componentDidMount and componentDidUpdate:
+									useEffect(() => {
+										// Update the document title using the browser API
+										document.title = `You clicked ${count} times`;
+									});
+								
+									return (
+										&lt;div&gt;
+											&lt;p&gt;You clicked {count} times&lt;/p&gt;
+											&lt;button onClick={() => setCount(count + 1)}&gt;
+												Click me
+											&lt;/button&gt;
+										&lt;/div&gt;
+									);
+								}
+						</code></pre>
+						<aside class="notes">
+								What does useEffect do? By using this Hook, you tell React that your component needs to do something after render. 
+								React will remember the function you passed, and call it later after performing the DOM updates.<br>
+								Why is useEffect called inside a component? 
+								Placing useEffect inside the component lets us access the count state variable (or any props) right from the effect. 
+								We don’t need a special API to read it — it’s already in the function scope. 
+								Hooks embrace JavaScript closures and avoid introducing React-specific APIs where JavaScript already provides a solution. <br>
+								Does useEffect run after every render? Yes! By default, it runs both after the first render and after every update. 
+								Instead of thinking in terms of “mounting” and “updating”, you might find it easier to think that effects happen “after render”. 
+								React guarantees the DOM has been updated by the time it runs the effects. <br>
+								one more great thing, that effects scheduled with useEffect don’t block the browser from updating the screen. 
+								This makes your app feel more responsive. The majority of effects don’t need to happen synchronously. 
+								In the uncommon cases where they do (such as measuring the layout), there is a separate useLayoutEffect Hook with an API identical to useEffect
+						</aside>
+					</section>
+					<section>
+						<h2>useContext</h2>
+						<pre><code>
+								const themes = {
+									light: {foreground: "#000000", background: "#eeeeee"},
+									dark: {foreground: "#ffffff", background: "#222222"}
+								};
+								const ThemeContext = React.createContext(themes.light);
+								function App() {
+									return (&lt;ThemeContext.Provider value={themes.dark}&gt;&lt;Toolbar /&gt;&lt;/ThemeContext.Provider&gt;);
+								}
+								function Toolbar(props) {
+									return (&lt;div&gt;&lt;ThemedButton /&gt;&lt;/div&gt;);
+								}
+								function ThemedButton() {
+									const theme = useContext(ThemeContext);
+									return (
+										&lt;button style={{ background: theme.background, color: theme.foreground }}&gt;
+											I am styled by theme context!
+										&lt;/button&gt;
+									);
+								}
+						</code></pre>
+						<aside class="notes">
+							useContext lets you subscribe to React context without introducing nesting: <br>
+							Accepts a context object (the value returned from React.createContext) and returns the current 
+							context value for that context. 
+							The current context value is determined by the value prop of the nearest `<MyContext.Provider>` 
+								above the calling component in the tree. <br>
+							When the nearest `<MyContext.Provider>` above the component updates, 
+							this Hook will trigger a rerender with the latest context value passed to that MyContext provider. <br>
+							NOTE that the argument to useContext must be the context object itself: <br>
+							A component calling useContext will always re-render when the context value changes. 
+							If re-rendering the component is expensive, you can optimize it by using memoization.
+							useContext(MyContext) only lets you read the context and subscribe to its changes. 
+							You still need a `<MyContext.Provider>` above in the tree to provide the value for this context.
+						</aside>
+					</section>
+				</section>
+				<section class="five">
+						<h2>Hooks at a Glance</h2>
+						<ul><p>Additional Hooks</p>
+							<li>useReducer</li>
+							<li>useCallback</li>
+							<li>useMemo</li>
+							<li>useRef</li>
+							<li>useImperativeHandle</li>
+							<li>useLayoutEffect</li>
+							<li>useDebugValue</li>
+						</ul>
+						<aside class="notes">
+							useReducer - An alternative to useState. Accepts a reducer of type (state, action) => newState, 
+							and returns the current state paired with a dispatch method <br>
+							useCallback - Pass an inline callback and an array of dependencies. useCallback will return 
+							a memoized version of the callback that only changes if one of the dependencies has changed <br>
+							useMemo - Pass a “create” function and an array of dependencies. useMemo will only recompute 
+							the memoized value when one of the dependencies has changed. This optimization helps to avoid expensive calculations on every render. <br>
+							useRef - useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue). 
+							The returned object will persist for the full lifetime of the component. <br>
+							useImperativeHandle - useImperativeHandle customizes the instance value that is exposed to parent components 
+							when using ref. As always, imperative code using refs should be avoided in most cases. useImperativeHandle should be used with forwardRef: <br>
+							useLayoutEffect - The signature is identical to useEffect, but it fires synchronously after all DOM mutations. 
+							Use this to read layout from the DOM and synchronously re-render. Updates scheduled inside useLayoutEffect will be flushed synchronously, before the browser has a chance to paint <br>
+							useDebugValue - useDebugValue can be used to display a label for custom hooks in React DevTools.
+						</aside>
+				</section>
+				<section class="six">
+					<h2>Do React Hooks Replace Redux?</h2>
+					<img data-src="https://i.morioh.com/d1f34611ab.png" alt="replacement">
+					<aside class="notes">
+							Crucially, Hooks work side-by-side with existing code so you can adopt them gradually. 
+							There is no rush to migrate to Hooks. 
+							It’s best to practice using Hooks in new and non-critical components first, and ensure that everybody on your team feels comfortable with them. <br>
+							It is intended for Hooks to cover all existing use cases for classes, but class components will be supported. <br>
+							You don’t always need Redux for every app, or every component. 
+							If your app consists of a single view, doesn’t save or load state, and has no asynchronous Input/Output, 
+							I can’t think of a good reason to add the complexity of Redux.
+							Likewise, if your component:
+								Doesn’t use the network.
+								Doesn’t save or load state.
+								Doesn’t share state with other non-child components.
+								Does need some ephemeral local component state.
+							React hooks will serve you well in those cases.
+						</aside>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
